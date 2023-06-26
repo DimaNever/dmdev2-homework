@@ -5,21 +5,42 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be1c8fdd-5e95-44f2-b079-ab7c34ec7be3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/dmdevmvn/App.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/dmdevmvn/AppTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/dmdevmvn/App.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/dmdevmvn/common/dao/UserDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/dmdevmvn/common/entity/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/test/java/com/dmdevmvn/AppTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/test/java/com/dmdevmvn/integration/ExampleIT.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/src/main/java/com/dmdevmvn/App.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/src/main/java/com/dmdevmvn/service/AppRunner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/src/main/java/com/dmdevmvn/service/dto/UserDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/src/main/java/com/dmdevmvn/service/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/src/test/java/com/dmdevmvn/AppTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
   </component>
   <component name="ProjectId" id="2Rb9csMnxY8OfaLsVLihpjYEMmw" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -29,19 +50,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "jdk.selected.JAVA_MODULE": "20",
+    "last_opened_file_path": "C:/Users/nasty/IdeaProjects/dmdev2-homework/common/src/test/java/com/dmdevmvn",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "MavenSettings",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\nasty\IdeaProjects\dmdev2-homework\common\src\test\java\com\dmdevmvn" />
+      <recent name="C:\Users\nasty\IdeaProjects\dmdev2-homework\common\src\main\java\com\dmdevmvn" />
+      <recent name="C:\Users\nasty\IdeaProjects\dmdev2-homework\service\src\main\java\com\dmdevmvn" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <module name="dmdev2-homework" />
