@@ -1,65 +1,97 @@
 package com.dmdevmvn.service.entity;
 
+import com.dmdevmvn.service.util.EntityUtil;
 import com.dmdevmvn.service.util.HibernateUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Random;
-
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
+@Slf4j
 class SparePartIT {
+    static private SessionFactory sessionFactory;
+    private Session session;
+
+    @BeforeAll
+    static void beforeTests() {
+        sessionFactory = HibernateUtil.buildSessionFactory();
+    }
+
+    @BeforeEach
+    void setUp() {
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+    }
+
+    @AfterEach
+    void tearDown() {
+        session.getTransaction().rollback();
+        session.close();
+    }
+
     @Test
     void saveSparePart() {
+        SparePart expectedSparePart = EntityUtil.buildRandomSparePart();
 
-        SparePart expectedSparePart = buildRandomSparePart();
+        session.save(expectedSparePart);
+        session.clear();
 
-        try (
-                SessionFactory sessionFactory = HibernateUtil.buildSessionFactory();
-                Session session = sessionFactory.openSession()) {
-            session.beginTransaction();
+        SparePart actualSparePart = session.get(SparePart.class, expectedSparePart.getId());
 
-            session.save(expectedSparePart);
-            session.flush();
-            session.clear();
-
-            SparePart actualSparePart = session.get(SparePart.class, expectedSparePart.getId());
-            System.out.println(actualSparePart);
-
-            assertThat(expectedSparePart).isEqualTo(actualSparePart);
-
-            session.getTransaction().rollback();
-        }
+        assertNotNull(actualSparePart.getId());
     }
 
     @Test
     void getSparePart() {
-        SparePart expectedSparePart = buildRandomSparePart();
+        SparePart expectedSparePart = EntityUtil.buildRandomSparePart();
 
-        try (
-                SessionFactory sessionFactory = HibernateUtil.buildSessionFactory();
-                Session session = sessionFactory.openSession()) {
-            session.beginTransaction();
+        session.save(expectedSparePart);
+        session.clear();
 
-            session.save(expectedSparePart);
+        SparePart actualSparePart = session.get(SparePart.class, expectedSparePart.getId());
 
-            session.getTransaction().commit();
-            session.clear();
-            SparePart actualSparePart = session.get(SparePart.class, expectedSparePart.getId());
-            System.out.println(actualSparePart);
-
-            assertThat(expectedSparePart).isEqualTo(actualSparePart);
-        }
+        assertThat(expectedSparePart).isEqualTo(actualSparePart);
     }
 
-    private static SparePart buildRandomSparePart() {
-        Long random = new Random().nextLong(10000);
-        SparePart sparePart = SparePart.builder()
-                .vendorCode(String.valueOf(random))
-                .title("part#" + random)
-                .price(random * 10)
-                .build();
-        return sparePart;
+    @Test
+    void updateSparePart() {
+        SparePart expectedSparePart = EntityUtil.buildRandomSparePart();
+        session.save(expectedSparePart);
+
+        expectedSparePart.setTitle("Update");
+        session.flush();
+        session.clear();
+
+        SparePart actualSparePart = session.get(SparePart.class, expectedSparePart.getId());
+
+        assertEquals("Update", actualSparePart.getTitle());
+    }
+
+    @Test
+    void deleteSparePart() {
+        SparePart expectedSparePart = EntityUtil.buildRandomSparePart();
+        session.save(expectedSparePart);
+
+        session.delete(expectedSparePart);
+        session.flush();
+        session.clear();
+
+        SparePart actualSparePart = session.get(SparePart.class, expectedSparePart.getId());
+
+        assertNull(actualSparePart);
+    }
+
+    @AfterAll
+    static void afterTests() {
+        sessionFactory.close();
     }
 }

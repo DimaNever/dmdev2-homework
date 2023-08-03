@@ -3,7 +3,9 @@ package com.dmdevmvn.service.entity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,13 +14,18 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(exclude = "serviceSpareParts")
+@EqualsAndHashCode(exclude = "serviceSpareParts")
 @Builder
 @Entity
 @Table(name = "service")
@@ -32,10 +39,11 @@ public class Service {
     @Column(name = "type_service")
     private TypeService typeService;
 
-    private List<User> executors;
+    @ManyToOne
+    private User user;
 
-    @Column(name = "car_id")
-    private Long carId;
+    @ManyToOne
+    private Car car;
 
     @Column(name = "start_date")
     private LocalDate startDate;
@@ -43,8 +51,9 @@ public class Service {
     @Column(name = "end_date")
     private LocalDate endDate;
 
-    @Column(name = "spare_parts_id")
-    private List<SparePart> spareParts;
-
     private Long price;
+
+    @Builder.Default
+    @OneToMany(mappedBy = "service")
+    private List<ServiceSpareParts> serviceSpareParts = new ArrayList<>();
 }
