@@ -11,38 +11,38 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = {"client","orders"})
-@EqualsAndHashCode(exclude = {"client","orders"})
+@ToString(exclude = {"order", "sparePart"})
+@EqualsAndHashCode(exclude =  {"order", "sparePart"})
 @Builder
 @Entity
-@Table(name = "car")
-public class Car {
+@Table(name = "order_spare_parts")
+public class OrderSpareParts {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String model;
-
-    private Integer year;
-
-    private Long mileage;
+    @ManyToOne
+    private Order order;
 
     @ManyToOne
-    @JoinColumn(name = "client_id")
-    private Client client;
+    private SparePart sparePart;
 
-    @Builder.Default
-    @OneToMany(mappedBy = "car")
-    private List<Order> orders = new ArrayList<>();
+    private Integer quantity;
+
+    public void setOrder(Order order) {
+        this.order = order;
+        this.order.getOrderSpareParts().add(this);
+    }
+
+    public void setSparePart(SparePart sparePart) {
+        this.sparePart = sparePart;
+        this.sparePart.getOrderSpareParts().add(this);
+    }
 }

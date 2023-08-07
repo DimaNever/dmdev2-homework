@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 @Slf4j
-class UserIT {
+class ClientIT {
     private static SessionFactory sessionFactory;
     private Session session;
 
@@ -44,53 +44,54 @@ class UserIT {
     }
 
     @Test
-    void saveUser() {
-        User expectedUser = EntityUtil.buildRandomUser("Save", "John");
+    void saveClient() {
+        Client expectedClient = EntityUtil.buildRandomClient("Ivan", "Ivanov");
 
-        session.save(expectedUser);
+        session.save(expectedClient);
 
-        User actualUser = session.get(User.class, expectedUser.getId());
+        Client actualClient = session.get(Client.class, expectedClient.getId());
 
-        assertNotNull(actualUser);
+        assertNotNull(actualClient);
     }
 
     @Test
-    void getUser() {
-        User expectedUser = EntityUtil.buildRandomUser("Get", "Sidorov");
+    void getClient() {
+        Client expectedClient = EntityUtil.buildRandomClient("Ivan", "Ivanov");
 
-        session.save(expectedUser);
+        session.save(expectedClient);
+
+        session.flush();
         session.clear();
+        Client actualClient = session.get(Client.class, expectedClient.getId());
 
-        User actualUser = session.get(User.class, expectedUser.getId());
-
-        assertThat(expectedUser).isEqualTo(actualUser);
+        assertThat(expectedClient).isEqualTo(actualClient);
     }
 
     @Test
-    void updateUser() {
-        User expectedUser = EntityUtil.buildRandomUser("Update", "Testov");
-        session.save(expectedUser);
+    void updateClient() {
+        Client expectedClient = EntityUtil.buildRandomClient("Ivan", "Ivanov");
+        session.save(expectedClient);
 
-        expectedUser.setFirstName("New");
+        expectedClient.setFirstName("Viktor");
         session.flush();
         session.clear();
 
-        User actualUser = session.get(User.class, expectedUser.getId());
+        Client actualClient = session.get(Client.class, expectedClient.getId());
 
-        assertEquals("New", actualUser.getFirstName());
+        assertEquals("Viktor", actualClient.getFirstName());
     }
 
     @Test
-    void deleteUser() {
-        User expectedUser = EntityUtil.buildRandomUser("Delete", "Testov");
-        session.save(expectedUser);
+    void deleteClient() {
+        Client expectedClient = EntityUtil.buildRandomClient("Ivan", "Ivanov");
+        session.save(expectedClient);
 
-        session.delete(expectedUser);
+        session.delete(expectedClient);
         session.flush();
         session.clear();
 
-        User actualUser = session.get(User.class, expectedUser.getId());
+        Client actualClient = session.get(Client.class, expectedClient.getId());
 
-        assertNull(actualUser);
+        assertNull(actualClient);
     }
 }

@@ -1,6 +1,6 @@
 package com.dmdevmvn.service.entity;
 
-public enum TypeService {
+public enum ServiceType {
     DIAGNOSTICS,
     MAINTENANCE,
     REPAIR
