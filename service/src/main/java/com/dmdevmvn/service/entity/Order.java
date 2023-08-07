@@ -24,20 +24,20 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = "serviceSpareParts")
-@EqualsAndHashCode(exclude = "serviceSpareParts")
+@ToString(exclude = "orderSpareParts")
+@EqualsAndHashCode(exclude = "orderSpareParts")
 @Builder
 @Entity
-@Table(name = "service")
-public class Service {
+@Table(name = "orders")
+public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "type_service")
-    private TypeService typeService;
+    @Column(name = "service_type")
+    private ServiceType serviceType;
 
     @ManyToOne
     private User user;
@@ -54,6 +54,6 @@ public class Service {
     private Long price;
 
     @Builder.Default
-    @OneToMany(mappedBy = "service")
-    private List<ServiceSpareParts> serviceSpareParts = new ArrayList<>();
+    @OneToMany(mappedBy = "order")
+    private List<OrderSpareParts> orderSpareParts = new ArrayList<>();
 }

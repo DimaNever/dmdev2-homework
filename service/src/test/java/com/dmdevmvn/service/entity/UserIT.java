@@ -1,7 +1,7 @@
 package com.dmdevmvn.service.entity;
 
 import com.dmdevmvn.service.util.EntityUtil;
-import com.dmdevmvn.service.util.HibernateUtil;
+import com.dmdevmvn.util.HibernateTestUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -18,12 +18,12 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 @Slf4j
 class UserIT {
-    static private SessionFactory sessionFactory;
+    private static SessionFactory sessionFactory;
     private Session session;
 
     @BeforeAll
     static void beforeTests() {
-        sessionFactory = HibernateUtil.buildSessionFactory();
+        sessionFactory = HibernateTestUtil.buildSessionFactory();
     }
 
     @BeforeEach
@@ -38,6 +38,11 @@ class UserIT {
         session.close();
     }
 
+    @AfterAll
+    static void afterTests() {
+        sessionFactory.close();
+    }
+
     @Test
     void saveUser() {
         User expectedUser = EntityUtil.buildRandomUser("Save", "John");
@@ -46,7 +51,7 @@ class UserIT {
 
         User actualUser = session.get(User.class, expectedUser.getId());
 
-        assertNotNull(actualUser.getId());
+        assertNotNull(actualUser);
     }
 
     @Test
@@ -87,10 +92,5 @@ class UserIT {
         User actualUser = session.get(User.class, expectedUser.getId());
 
         assertNull(actualUser);
-    }
-
-    @AfterAll
-    static void afterTests() {
-        sessionFactory.close();
     }
 }

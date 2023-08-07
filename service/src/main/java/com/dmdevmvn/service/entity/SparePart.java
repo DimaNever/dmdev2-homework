@@ -20,8 +20,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = "serviceSpareParts")
-@EqualsAndHashCode(exclude = "serviceSpareParts")
+@ToString(exclude = "orderSpareParts")
+@EqualsAndHashCode(exclude = "orderSpareParts")
 @Builder
 @Entity
 @Table(name = "spare_part")
@@ -40,5 +40,5 @@ public class SparePart {
 
     @Builder.Default
     @OneToMany(mappedBy = "sparePart")
-    private List<ServiceSpareParts> serviceSpareParts = new ArrayList<>();
+    private List<OrderSpareParts> orderSpareParts = new ArrayList<>();
 }

@@ -1,7 +1,7 @@
 package com.dmdevmvn.service.entity;
 
 import com.dmdevmvn.service.util.EntityUtil;
-import com.dmdevmvn.service.util.HibernateUtil;
+import com.dmdevmvn.util.HibernateTestUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -18,12 +18,12 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 @Slf4j
 class SparePartIT {
-    static private SessionFactory sessionFactory;
+    private static SessionFactory sessionFactory;
     private Session session;
 
     @BeforeAll
     static void beforeTests() {
-        sessionFactory = HibernateUtil.buildSessionFactory();
+        sessionFactory = HibernateTestUtil.buildSessionFactory();
     }
 
     @BeforeEach
@@ -38,6 +38,11 @@ class SparePartIT {
         session.close();
     }
 
+    @AfterAll
+    static void afterTests() {
+        sessionFactory.close();
+    }
+
     @Test
     void saveSparePart() {
         SparePart expectedSparePart = EntityUtil.buildRandomSparePart();
@@ -47,7 +52,7 @@ class SparePartIT {
 
         SparePart actualSparePart = session.get(SparePart.class, expectedSparePart.getId());
 
-        assertNotNull(actualSparePart.getId());
+        assertNotNull(actualSparePart);
     }
 
     @Test
@@ -88,10 +93,5 @@ class SparePartIT {
         SparePart actualSparePart = session.get(SparePart.class, expectedSparePart.getId());
 
         assertNull(actualSparePart);
-    }
-
-    @AfterAll
-    static void afterTests() {
-        sessionFactory.close();
     }
 }

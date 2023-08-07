@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS car
     client_id INT REFERENCES client (id)
     );
 
-CREATE TABLE IF NOT EXISTS service
+CREATE TABLE IF NOT EXISTS order
 (
     id             BIGSERIAL PRIMARY KEY,
     type_service   VARCHAR(128) NOT NULL,

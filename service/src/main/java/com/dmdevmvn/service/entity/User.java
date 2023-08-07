@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,7 +22,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(exclude = "services")
+@ToString(exclude = "orders")
+@EqualsAndHashCode(exclude = "orders")
 @Builder
 @Entity
 @Table(name = "users")
@@ -55,5 +57,5 @@ public class User {
 
     @Builder.Default
     @OneToMany(mappedBy = "user")
-    private List<Service> services = new ArrayList<>();
+    private List<Order> orders = new ArrayList<>();
 }

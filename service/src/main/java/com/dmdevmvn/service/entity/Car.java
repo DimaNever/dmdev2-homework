@@ -21,8 +21,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = "client")
-@EqualsAndHashCode(exclude = "services")
+@ToString(exclude = {"client","orders"})
+@EqualsAndHashCode(exclude = {"client","orders"})
 @Builder
 @Entity
 @Table(name = "car")
@@ -44,5 +44,5 @@ public class Car {
 
     @Builder.Default
     @OneToMany(mappedBy = "car")
-    private List<Service> services = new ArrayList<>();
+    private List<Order> orders = new ArrayList<>();
 }

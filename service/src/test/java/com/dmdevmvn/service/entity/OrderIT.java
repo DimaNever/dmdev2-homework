@@ -1,6 +1,6 @@
 package com.dmdevmvn.service.entity;
 
-import com.dmdevmvn.service.util.HibernateUtil;
+import com.dmdevmvn.util.HibernateTestUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,20 +13,20 @@ import org.junit.jupiter.api.Test;
 import static com.dmdevmvn.service.util.EntityUtil.buildCar;
 import static com.dmdevmvn.service.util.EntityUtil.buildRandomClient;
 import static com.dmdevmvn.service.util.EntityUtil.buildRandomUser;
-import static com.dmdevmvn.service.util.EntityUtil.buildService;
+import static com.dmdevmvn.service.util.EntityUtil.buildOrder;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 @Slf4j
-class ServiceIT {
-    static private SessionFactory sessionFactory;
+class OrderIT {
+    private static  SessionFactory sessionFactory;
     private Session session;
 
     @BeforeAll
     static void beforeTests() {
-        sessionFactory = HibernateUtil.buildSessionFactory();
+        sessionFactory = HibernateTestUtil.buildSessionFactory();
     }
 
     @BeforeEach
@@ -41,22 +41,27 @@ class ServiceIT {
         session.close();
     }
 
+    @AfterAll
+    static void afterTests() {
+        sessionFactory.close();
+    }
+
     @Test
     void saveService() {
         User expectedUser = buildRandomUser("Save", "ServiceUser");
         Client expectedClient = buildRandomClient("Save", "ServiceClient");
         Car expectedCar = buildCar("BMW", expectedClient);
-        Service expectedService = buildService(expectedUser, expectedCar);
+        Order expectedOrder = buildOrder(expectedUser, expectedCar);
 
         session.save(expectedUser);
         session.save(expectedClient);
         session.save(expectedCar);
-        session.save(expectedService);
+        session.save(expectedOrder);
         session.clear();
 
-        Service actualService = session.get(Service.class, expectedService.getId());
+        Order actualOrder = session.get(Order.class, expectedOrder.getId());
 
-        assertNotNull(actualService.getId());
+        assertNotNull(actualOrder);
     }
 
     @Test
@@ -64,17 +69,17 @@ class ServiceIT {
         User expectedUser = buildRandomUser("Get", "ServiceUser");
         Client expectedClient = buildRandomClient("Get", "ServiceClient");
         Car expectedCar = buildCar("BMW", expectedClient);
-        Service expectedService = buildService(expectedUser, expectedCar);
+        Order expectedOrder = buildOrder(expectedUser, expectedCar);
 
         session.save(expectedUser);
         session.save(expectedClient);
         session.save(expectedCar);
-        session.save(expectedService);
+        session.save(expectedOrder);
         session.clear();
 
-        Service actualService = session.get(Service.class, expectedService.getId());
+        Order actualOrder = session.get(Order.class, expectedOrder.getId());
 
-        assertThat(expectedService).isEqualTo(actualService);
+        assertThat(expectedOrder).isEqualTo(actualOrder);
     }
 
     @Test
@@ -82,20 +87,20 @@ class ServiceIT {
         User expectedUser = buildRandomUser("Update", "ServiceUser");
         Client expectedClient = buildRandomClient("Update", "ServiceClient");
         Car expectedCar = buildCar("BMW", expectedClient);
-        Service expectedService = buildService(expectedUser, expectedCar);
+        Order expectedOrder = buildOrder(expectedUser, expectedCar);
 
         session.save(expectedUser);
         session.save(expectedClient);
         session.save(expectedCar);
-        session.save(expectedService);
+        session.save(expectedOrder);
 
-        expectedService.setPrice(1_000_000L);
+        expectedOrder.setPrice(1_000_000L);
         session.flush();
         session.clear();
 
-        Service actualService = session.get(Service.class, expectedService.getId());
+        Order actualOrder = session.get(Order.class, expectedOrder.getId());
 
-        assertEquals(1_000_000L, actualService.getPrice());
+        assertEquals(1_000_000L, actualOrder.getPrice());
     }
 
     @Test
@@ -103,24 +108,19 @@ class ServiceIT {
         User expectedUser = buildRandomUser("Delete", "ServiceUser");
         Client expectedClient = buildRandomClient("Delete", "ServiceClient");
         Car expectedCar = buildCar("BMW", expectedClient);
-        Service expectedService = buildService(expectedUser, expectedCar);
+        Order expectedOrder = buildOrder(expectedUser, expectedCar);
 
         session.save(expectedUser);
         session.save(expectedClient);
         session.save(expectedCar);
-        session.save(expectedService);
+        session.save(expectedOrder);
 
-        session.delete(expectedService);
+        session.delete(expectedOrder);
         session.flush();
         session.clear();
 
-        Service actualService = session.get(Service.class, expectedService.getId());
+        Order actualOrder = session.get(Order.class, expectedOrder.getId());
 
-        assertNull(actualService);
-    }
-
-    @AfterAll
-    static void afterTests() {
-        sessionFactory.close();
+        assertNull(actualOrder);
     }
 }

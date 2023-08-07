@@ -3,6 +3,7 @@ package com.dmdevmvn.service.entity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -16,31 +17,32 @@ import javax.persistence.Table;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = {"service", "sparePart"})
+@ToString(exclude = {"order", "sparePart"})
+@EqualsAndHashCode(exclude =  {"order", "sparePart"})
 @Builder
 @Entity
-@Table(name = "service_spare_parts")
-public class ServiceSpareParts {
+@Table(name = "order_spare_parts")
+public class OrderSpareParts {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    private Service service;
+    private Order order;
 
     @ManyToOne
     private SparePart sparePart;
 
     private Integer quantity;
 
-    public void setService(Service service) {
-        this.service = service;
-        this.service.getServiceSpareParts().add(this);
+    public void setOrder(Order order) {
+        this.order = order;
+        this.order.getOrderSpareParts().add(this);
     }
 
     public void setSparePart(SparePart sparePart) {
         this.sparePart = sparePart;
-        this.sparePart.getServiceSpareParts().add(this);
+        this.sparePart.getOrderSpareParts().add(this);
     }
 }
