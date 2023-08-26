@@ -15,7 +15,7 @@ import static com.dmdevmvn.service.util.EntityUtil.buildRandomClient;
 import static com.dmdevmvn.service.util.EntityUtil.buildRandomSparePart;
 import static com.dmdevmvn.service.util.EntityUtil.buildRandomUser;
 import static com.dmdevmvn.service.util.EntityUtil.buildOrder;
-import static com.dmdevmvn.service.util.EntityUtil.buildServiceSpareParts;
+import static com.dmdevmvn.service.util.EntityUtil.buildOrderSpareParts;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -49,13 +49,13 @@ class OrderSparePartsIT {
     }
 
     @Test
-    void saveServiceSpareParts() {
+    void saveOrderSpareParts() {
         User user = buildRandomUser("User", "OrderSpareParts");
         Client client = buildRandomClient("Client", "OrderSpareParts");
         Car car = buildCar("Mercedes", client);
         Order order = buildOrder(user, car);
         SparePart sparePart = buildRandomSparePart();
-        OrderSpareParts expectedOrderSpareParts = buildServiceSpareParts(order, sparePart);
+        OrderSpareParts expectedOrderSpareParts = buildOrderSpareParts(order, sparePart);
 
         session.save(user);
         session.save(client);
@@ -71,13 +71,13 @@ class OrderSparePartsIT {
     }
 
     @Test
-    void getServiceSpareParts() {
+    void getOrderSpareParts() {
         User user = buildRandomUser("User", "OrderSpareParts");
         Client client = buildRandomClient("Client", "OrderSpareParts");
         Car car = buildCar("Mercedes", client);
         Order order = buildOrder(user, car);
         SparePart sparePart = buildRandomSparePart();
-        OrderSpareParts expectedOrderSpareParts = buildServiceSpareParts(order, sparePart);
+        OrderSpareParts expectedOrderSpareParts = buildOrderSpareParts(order, sparePart);
 
         session.save(user);
         session.save(client);
@@ -93,13 +93,13 @@ class OrderSparePartsIT {
     }
 
     @Test
-    void updateServiceSpareParts() {
+    void updateOrderSpareParts() {
         User user = buildRandomUser("User", "OrderSpareParts");
         Client client = buildRandomClient("Client", "OrderSpareParts");
         Car car = buildCar("Mercedes", client);
         Order order = buildOrder(user, car);
         SparePart sparePart = buildRandomSparePart();
-        OrderSpareParts expectedOrderSpareParts = buildServiceSpareParts(order, sparePart);
+        OrderSpareParts expectedOrderSpareParts = buildOrderSpareParts(order, sparePart);
 
         session.save(user);
         session.save(client);
@@ -118,13 +118,13 @@ class OrderSparePartsIT {
     }
 
     @Test
-    void deleteServiceSpareParts() {
+    void deleteOrderSpareParts() {
         User user = buildRandomUser("User", "OrderSpareParts");
         Client client = buildRandomClient("Client", "OrderSpareParts");
         Car car = buildCar("Mercedes", client);
         Order order = buildOrder(user, car);
         SparePart sparePart = buildRandomSparePart();
-        OrderSpareParts expectedOrderSpareParts = buildServiceSpareParts(order, sparePart);
+        OrderSpareParts expectedOrderSpareParts = buildOrderSpareParts(order, sparePart);
 
         session.save(user);
         session.save(client);

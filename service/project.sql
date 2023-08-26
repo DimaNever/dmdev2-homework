@@ -1,4 +1,4 @@
-CREATE DATABASE sto;
+CREATE DATABASE IF NOT EXISTS sto;
 
 CREATE TABLE IF NOT EXISTS users
 (
@@ -36,17 +36,24 @@ CREATE TABLE IF NOT EXISTS car
     model     VARCHAR(128) NOT NULL,
     year      NUMERIC(4) DEFAULT 1900,
     mileage   NUMERIC(7) DEFAULT 0,
-    client_id INT REFERENCES client (id)
+    client_id BIGINT REFERENCES client (id)
     );
 
-CREATE TABLE IF NOT EXISTS order
+CREATE TABLE IF NOT EXISTS orders
+(
+    id           BIGSERIAL PRIMARY KEY,
+    service_type VARCHAR(128) NOT NULL,
+    user_id    BIGINT REFERENCES users (id),
+    car_id       BIGINT REFERENCES car (id),
+    start_date   DATE,
+    end_date     DATE,
+    price        NUMERIC(11, 2) DEFAULT 0.00
+    );
+
+CREATE TABLE IF NOT EXISTS order_spare_parts
 (
     id             BIGSERIAL PRIMARY KEY,
-    type_service   VARCHAR(128) NOT NULL,
-    executors      INT REFERENCES users (id),
-    car_id         INT REFERENCES car (id),
-    start_date     DATE,
-    end_date       DATE,
-    spare_parts_id INT REFERENCES spare_part (id),
-    price          NUMERIC(11, 2) DEFAULT 0.00
+    order_id     BIGINT REFERENCES orders (id),
+    spare_part_id BIGINT REFERENCES spare_part (id),
+    quantity       INT
     );
