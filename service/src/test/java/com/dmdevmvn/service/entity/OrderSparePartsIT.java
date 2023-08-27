@@ -27,7 +27,7 @@ class OrderSparePartsIT {
     private Session session;
 
     @BeforeAll
-    static void beforeTests() {
+    static void beforeAll() {
         sessionFactory = HibernateTestUtil.buildSessionFactory();
     }
 
@@ -44,7 +44,7 @@ class OrderSparePartsIT {
     }
 
     @AfterAll
-    static void afterTests() {
+    static void afterAll() {
         sessionFactory.close();
     }
 

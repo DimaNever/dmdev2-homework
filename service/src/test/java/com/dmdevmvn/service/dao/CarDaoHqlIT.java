@@ -10,7 +10,6 @@ import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 
 import java.util.List;
 
@@ -18,7 +17,6 @@ import static java.util.stream.Collectors.toSet;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class CarDaoHqlIT {
 
     private static final SessionFactory sessionFactory = HibernateTestUtil.buildSessionFactory();
@@ -30,7 +28,7 @@ public class CarDaoHqlIT {
     }
 
     @AfterAll
-    static void afterTests() {
+    static void afterAll() {
         sessionFactory.close();
     }
 

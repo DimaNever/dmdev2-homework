@@ -22,7 +22,7 @@ class UserIT {
     private Session session;
 
     @BeforeAll
-    static void beforeTests() {
+    static void beforeAll() {
         sessionFactory = HibernateTestUtil.buildSessionFactory();
     }
 
@@ -39,7 +39,7 @@ class UserIT {
     }
 
     @AfterAll
-    static void afterTests() {
+    static void afterAll() {
         sessionFactory.close();
     }
 

@@ -17,7 +17,7 @@ public class HqlIT {
     private Session session;
 
     @BeforeAll
-    static void beforeTests() {
+    static void beforeAll() {
         sessionFactory = HibernateTestUtil.buildSessionFactory();
     }
 
@@ -34,7 +34,7 @@ public class HqlIT {
     }
 
     @AfterAll
-    static void afterTests() {
+    static void afterAll() {
         sessionFactory.close();
     }
 
@@ -55,7 +55,6 @@ public class HqlIT {
                 .setParameter("title", model)
                 .setParameter("name", "Save")
                 .uniqueResultOptional();
-        System.out.println(result);
     }
 
     @Test

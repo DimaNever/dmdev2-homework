@@ -21,7 +21,7 @@ public class CarDaoWithEntityGraphs {
         carRootGraph.addAttributeNodes("client");
 
         return session.createQuery("select c from Car c", Car.class)
-                .setHint(GraphSemantic.LOAD.getJpaHintName(), carRootGraph)
+                .setHint(GraphSemantic.FETCH.getJpaHintName(), carRootGraph)
                 .list();
     }
 
@@ -36,7 +36,7 @@ public class CarDaoWithEntityGraphs {
         orderSpareParts.addAttributeNodes("sparePart");
 
         Map<String, Object> properties = Map.of(
-                GraphSemantic.LOAD.getJpaHintName(), carRootGraph
+                GraphSemantic.FETCH.getJpaHintName(), carRootGraph
         );
 
         return session.find(Car.class, id, properties);

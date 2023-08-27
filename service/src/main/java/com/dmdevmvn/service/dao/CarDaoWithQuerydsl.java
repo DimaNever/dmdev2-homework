@@ -70,8 +70,8 @@ public class CarDaoWithQuerydsl {
 
         return new JPAQuery<Car>(session)
                 .select(car)
-                .from(client)
-                .join(client.cars, car)
+                .from(car)
+                .join(car.client, client)
                 .where(predicate)
                 .fetch();
     }
