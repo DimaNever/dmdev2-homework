@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,7 +19,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(exclude = {"order", "sparePart"})
-@EqualsAndHashCode(exclude =  {"order", "sparePart"})
+@EqualsAndHashCode(exclude = {"order", "sparePart"})
 @Builder
 @Entity
 @Table(name = "order_spare_parts")
@@ -28,10 +29,10 @@ public class OrderSpareParts {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Order order;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private SparePart sparePart;
 
     private Integer quantity;

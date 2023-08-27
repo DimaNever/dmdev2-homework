@@ -25,7 +25,7 @@ class OrderIT {
     private Session session;
 
     @BeforeAll
-    static void beforeTests() {
+    static void beforeAll() {
         sessionFactory = HibernateTestUtil.buildSessionFactory();
     }
 
@@ -42,12 +42,12 @@ class OrderIT {
     }
 
     @AfterAll
-    static void afterTests() {
+    static void afterAll() {
         sessionFactory.close();
     }
 
     @Test
-    void saveService() {
+    void saveOrder() {
         User expectedUser = buildRandomUser("Save", "ServiceUser");
         Client expectedClient = buildRandomClient("Save", "ServiceClient");
         Car expectedCar = buildCar("BMW", expectedClient);
@@ -65,7 +65,7 @@ class OrderIT {
     }
 
     @Test
-    void getService() {
+    void getOrder() {
         User expectedUser = buildRandomUser("Get", "ServiceUser");
         Client expectedClient = buildRandomClient("Get", "ServiceClient");
         Car expectedCar = buildCar("BMW", expectedClient);
@@ -83,7 +83,7 @@ class OrderIT {
     }
 
     @Test
-    void updateService() {
+    void updateOrder() {
         User expectedUser = buildRandomUser("Update", "ServiceUser");
         Client expectedClient = buildRandomClient("Update", "ServiceClient");
         Car expectedCar = buildCar("BMW", expectedClient);
@@ -104,7 +104,7 @@ class OrderIT {
     }
 
     @Test
-    void deleteService() {
+    void deleteOrder() {
         User expectedUser = buildRandomUser("Delete", "ServiceUser");
         Client expectedClient = buildRandomClient("Delete", "ServiceClient");
         Car expectedCar = buildCar("BMW", expectedClient);

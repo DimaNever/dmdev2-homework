@@ -46,7 +46,7 @@ public class EntityUtil {
         return Car.builder()
                 .model(model)
                 .year((int) (1990 + random))
-                .mileage(random * 100000)
+                .mileage(random * 10000)
                 .client(client)
                 .build();
     }
@@ -72,7 +72,7 @@ public class EntityUtil {
                 .build();
     }
 
-    public static OrderSpareParts buildServiceSpareParts(Order order, SparePart sparePart) {
+    public static OrderSpareParts buildOrderSpareParts(Order order, SparePart sparePart) {
         Integer random = new Random().nextInt(100);
         return OrderSpareParts.builder()
                 .order(order)
