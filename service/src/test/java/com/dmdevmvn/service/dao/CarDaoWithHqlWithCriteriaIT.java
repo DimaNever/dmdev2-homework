@@ -4,7 +4,6 @@ import com.dmdevmvn.service.entity.Car;
 import com.dmdevmvn.util.HibernateTestUtil;
 import com.dmdevmvn.util.TestDataImporter;
 import lombok.Cleanup;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.AfterAll;
@@ -13,14 +12,14 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static java.util.stream.Collectors.toSet;
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toSet;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CarDaoHqlIT {
+public class CarDaoWithHqlWithCriteriaIT {
 
     private static final SessionFactory sessionFactory = HibernateTestUtil.buildSessionFactory();
-    private final CarDao carDao = CarDao.getInstance();
+    private final CarDaoWithCriteria carDaoWithCriteria = CarDaoWithCriteria.getInstance();
 
     @BeforeAll
     static void initDB() {
@@ -37,7 +36,7 @@ public class CarDaoHqlIT {
         @Cleanup Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        List<Car> carList = carDao.findAll(session);
+        List<Car> carList = carDaoWithCriteria.findAll(session);
         assertThat(carList).hasSize(5);
 
         var models = carList.stream().map(Car::getModel).collect(toSet());
@@ -50,7 +49,7 @@ public class CarDaoHqlIT {
         @Cleanup Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        List<Car> carList = carDao.findAllByModel(session, "Audi");
+        List<Car> carList = carDaoWithCriteria.findAllByModel(session, "Audi");
 
         assertThat(carList).hasSize(2);
         assertThat(carList.get(0).getModel()).isEqualTo("Audi");
@@ -64,7 +63,7 @@ public class CarDaoHqlIT {
         session.beginTransaction();
 
         int limit = 3;
-        List<Car> carList = carDao.findLimitedCarOrderByYear(session, limit);
+        List<Car> carList = carDaoWithCriteria.findLimitedCarOrderByYear(session, limit);
         assertThat(carList).hasSize(limit);
 
         var models = carList.stream().map(Car::getModel).collect(toSet());
@@ -78,7 +77,7 @@ public class CarDaoHqlIT {
         @Cleanup Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        List<Car> carList = carDao.findAllCarsByClientLastName(session, "Petrov");
+        List<Car> carList = carDaoWithCriteria.findAllCarsByClientLastName(session, "Petrov");
         assertThat(carList).hasSize(2);
 
         var models = carList.stream().map(Car::getModel).collect(toList());
@@ -92,7 +91,7 @@ public class CarDaoHqlIT {
         @Cleanup Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        List<Object[]> result = carDao.findClientLastNameWithAvgCarMileageOrderByClientLastName(session);
+        List<Object[]> result = carDaoWithCriteria.findClientLastNameWithAvgCarMileageOrderByClientLastName(session);
         assertThat(result).hasSize(3);
         var lastNames = result.stream().map(a -> (String) a[0]).toList();
 

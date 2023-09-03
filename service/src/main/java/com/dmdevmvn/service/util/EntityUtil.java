@@ -1,10 +1,12 @@
 package com.dmdevmvn.service.util;
 
+
 import com.dmdevmvn.service.entity.Car;
 import com.dmdevmvn.service.entity.Client;
 import com.dmdevmvn.service.entity.Order;
 import com.dmdevmvn.service.entity.OrderSpareParts;
 import com.dmdevmvn.service.entity.Role;
+import com.dmdevmvn.service.entity.ServiceType;
 import com.dmdevmvn.service.entity.SparePart;
 import com.dmdevmvn.service.entity.User;
 import lombok.experimental.UtilityClass;
@@ -12,15 +14,13 @@ import lombok.experimental.UtilityClass;
 import java.time.LocalDate;
 import java.util.Random;
 
-import static com.dmdevmvn.service.entity.ServiceType.MAINTENANCE;
-
 @UtilityClass
 public class EntityUtil {
 
-    public static User buildRandomUser(String firstName, String lastName) {
+    public static User buildRandomUser(String firstName, String lastName, Role role) {
         long random = new Random().nextLong(10000);
         return User.builder()
-                .role(Role.ADMIN)
+                .role(role)
                 .firstName(firstName)
                 .lastName(lastName)
                 .phoneNumber(87771112233L + random)
@@ -60,10 +60,10 @@ public class EntityUtil {
                 .build();
     }
 
-    public static Order buildOrder(User user, Car car) {
+    public static Order buildOrder(User user, Car car, ServiceType serviceType) {
         long random = new Random().nextLong(10000);
         return Order.builder()
-                .serviceType(MAINTENANCE)
+                .serviceType(serviceType)
                 .user(user)
                 .car(car)
                 .startDate(LocalDate.now())

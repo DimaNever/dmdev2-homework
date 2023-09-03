@@ -48,10 +48,10 @@ class OrderIT {
 
     @Test
     void saveOrder() {
-        User expectedUser = buildRandomUser("Save", "ServiceUser");
+        User expectedUser = buildRandomUser("Save", "ServiceUser", Role.ADMIN);
         Client expectedClient = buildRandomClient("Save", "ServiceClient");
         Car expectedCar = buildCar("BMW", expectedClient);
-        Order expectedOrder = buildOrder(expectedUser, expectedCar);
+        Order expectedOrder = buildOrder(expectedUser, expectedCar, ServiceType.MAINTENANCE);
 
         session.save(expectedUser);
         session.save(expectedClient);
@@ -66,10 +66,10 @@ class OrderIT {
 
     @Test
     void getOrder() {
-        User expectedUser = buildRandomUser("Get", "ServiceUser");
+        User expectedUser = buildRandomUser("Get", "ServiceUser", Role.ADMIN);
         Client expectedClient = buildRandomClient("Get", "ServiceClient");
         Car expectedCar = buildCar("BMW", expectedClient);
-        Order expectedOrder = buildOrder(expectedUser, expectedCar);
+        Order expectedOrder = buildOrder(expectedUser, expectedCar, ServiceType.MAINTENANCE);
 
         session.save(expectedUser);
         session.save(expectedClient);
@@ -84,10 +84,10 @@ class OrderIT {
 
     @Test
     void updateOrder() {
-        User expectedUser = buildRandomUser("Update", "ServiceUser");
+        User expectedUser = buildRandomUser("Update", "ServiceUser", Role.ADMIN);
         Client expectedClient = buildRandomClient("Update", "ServiceClient");
         Car expectedCar = buildCar("BMW", expectedClient);
-        Order expectedOrder = buildOrder(expectedUser, expectedCar);
+        Order expectedOrder = buildOrder(expectedUser, expectedCar, ServiceType.MAINTENANCE);
 
         session.save(expectedUser);
         session.save(expectedClient);
@@ -105,10 +105,10 @@ class OrderIT {
 
     @Test
     void deleteOrder() {
-        User expectedUser = buildRandomUser("Delete", "ServiceUser");
+        User expectedUser = buildRandomUser("Delete", "ServiceUser", Role.ADMIN);
         Client expectedClient = buildRandomClient("Delete", "ServiceClient");
         Car expectedCar = buildCar("BMW", expectedClient);
-        Order expectedOrder = buildOrder(expectedUser, expectedCar);
+        Order expectedOrder = buildOrder(expectedUser, expectedCar, ServiceType.MAINTENANCE);
 
         session.save(expectedUser);
         session.save(expectedClient);

@@ -23,7 +23,7 @@ import java.util.List;
 @EqualsAndHashCode(exclude = "cars")
 @Builder
 @Entity
-public class Client {
+public class Client implements BaseEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

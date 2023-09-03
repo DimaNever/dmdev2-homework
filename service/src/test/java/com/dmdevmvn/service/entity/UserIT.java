@@ -45,7 +45,7 @@ class UserIT {
 
     @Test
     void saveUser() {
-        User expectedUser = EntityUtil.buildRandomUser("Save", "John");
+        User expectedUser = EntityUtil.buildRandomUser("Save", "John", Role.ADMIN);
 
         session.save(expectedUser);
 
@@ -56,7 +56,7 @@ class UserIT {
 
     @Test
     void getUser() {
-        User expectedUser = EntityUtil.buildRandomUser("Get", "Sidorov");
+        User expectedUser = EntityUtil.buildRandomUser("Get", "Sidorov", Role.ADMIN);
 
         session.save(expectedUser);
         session.clear();
@@ -68,7 +68,7 @@ class UserIT {
 
     @Test
     void updateUser() {
-        User expectedUser = EntityUtil.buildRandomUser("Update", "Testov");
+        User expectedUser = EntityUtil.buildRandomUser("Update", "Testov", Role.ADMIN);
         session.save(expectedUser);
 
         expectedUser.setFirstName("New");
@@ -82,7 +82,7 @@ class UserIT {
 
     @Test
     void deleteUser() {
-        User expectedUser = EntityUtil.buildRandomUser("Delete", "Testov");
+        User expectedUser = EntityUtil.buildRandomUser("Delete", "Testov", Role.ADMIN);
         session.save(expectedUser);
 
         session.delete(expectedUser);

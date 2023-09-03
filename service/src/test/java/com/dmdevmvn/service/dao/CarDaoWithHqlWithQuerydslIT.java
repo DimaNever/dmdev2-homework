@@ -18,7 +18,7 @@ import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CarDaoWithQuerydslIT {
+public class CarDaoWithHqlWithQuerydslIT {
 
     private static final SessionFactory sessionFactory = HibernateTestUtil.buildSessionFactory();
     private final CarDaoWithQuerydsl carDaoWithQuerydsl = CarDaoWithQuerydsl.getInstance();

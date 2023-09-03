@@ -23,7 +23,7 @@ import javax.persistence.Table;
 @Builder
 @Entity
 @Table(name = "order_spare_parts")
-public class OrderSpareParts {
+public class OrderSpareParts implements BaseEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
