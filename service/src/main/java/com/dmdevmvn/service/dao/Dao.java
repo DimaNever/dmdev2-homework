@@ -13,15 +13,15 @@ public interface Dao<K extends Serializable, E extends BaseEntity<K>> {
 
     E save(E entity);
 
-    void delete(K id);
+    void delete(E entity);
 
     void update(E entity);
 
-    default Optional<E> findByID(K id) {
-        return findByID(id, emptyMap());
+    default Optional<E> findById(K id) {
+        return findById(id, emptyMap());
     }
 
-    Optional<E> findByID(K id, Map<String, Object> properties);
+    Optional<E> findById(K id, Map<String, Object> properties);
 
     List<E> findAll();
 }

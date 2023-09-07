@@ -14,7 +14,6 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 public class CarService {
-
     private final CarRepository carRepository;
     private final CarReadMapper carReadMapper;
     private final CarCreateMapper carCreateMapper;
@@ -31,14 +30,13 @@ public class CarService {
         Map<String, Object> properties = Map.of(
                 GraphSemantic.FETCH.getJpaHintName(), carRootGraph
         );
-        return carRepository.findByID(id, properties)
+        return carRepository.findById(id, properties)
                 .map(carReadMapper::mapFrom);
     }
 
     public boolean delete(Long id) {
-        var maybeCar = carRepository.findByID(id);
-        maybeCar.ifPresent(car -> carRepository.delete(car.getId()));
+        var maybeCar = carRepository.findById(id);
+        maybeCar.ifPresent(carRepository::delete);
         return maybeCar.isPresent();
     }
-
 }

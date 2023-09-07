@@ -16,7 +16,7 @@ public class CarCreateMapper implements Mapper<CarCreateDto, Car> {
                 .model(object.model())
                 .year(object.year())
                 .mileage(object.mileage())
-                .client(clientRepository.findByID(object.clientId()).orElseThrow(IllegalArgumentException::new))
+                .client(clientRepository.findById(object.clientId()).orElseThrow(IllegalArgumentException::new))
                 .build();
     }
 }

@@ -15,7 +15,7 @@ public class CarRepository extends RepositoryBase<Long, Car> {
         super(Car.class, entityManager);
     }
 
-    public List<Car> findAllByModel(String model) {
+    public List<Car> findAllCarsByModel(String model) {
         return new JPAQuery<Car>(getEntityManager())
                 .select(car)
                 .from(car)

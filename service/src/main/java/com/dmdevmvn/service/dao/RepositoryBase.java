@@ -25,9 +25,11 @@ public abstract class RepositoryBase<K extends Serializable, E extends BaseEntit
     }
 
     @Override
-    public void delete(K id) {
-        entityManager.remove(id);
-        entityManager.flush();
+    public void delete(E entity) {
+        if (entity.getId() != null) {
+            entityManager.remove(entityManager.find(clazz, entity.getId()));
+            entityManager.flush();
+        }
     }
 
     @Override
@@ -36,7 +38,7 @@ public abstract class RepositoryBase<K extends Serializable, E extends BaseEntit
     }
 
     @Override
-    public Optional<E> findByID(K id, Map<String, Object> properties) {
+    public Optional<E> findById(K id, Map<String, Object> properties) {
         return Optional.ofNullable(entityManager.find(clazz, id, properties));
     }
 

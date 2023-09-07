@@ -26,4 +26,13 @@ public class OrderRepository extends RepositoryBase<Long, Order> {
                 .where(car.id.eq(carId))
                 .fetch();
     }
+
+    public List<Order> findAllOrdersByClientId(Long clientId) {
+        return new JPAQuery<Car>(getEntityManager())
+                .select(order)
+                .from(order)
+                .join(order.car, car)
+                .where(car.client.id.eq(clientId))
+                .fetch();
+    }
 }
