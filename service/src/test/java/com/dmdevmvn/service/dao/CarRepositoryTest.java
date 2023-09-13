@@ -3,17 +3,10 @@ package com.dmdevmvn.service.dao;
 import com.dmdevmvn.service.entity.Car;
 import com.dmdevmvn.service.entity.Client;
 import com.dmdevmvn.service.util.EntityUtil;
-import com.dmdevmvn.util.HibernateTestUtil;
-import com.dmdevmvn.util.TestDataImporter;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+import com.dmdevmvn.util.TestBase;
+
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Proxy;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,41 +16,20 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class CarRepositoryTest {
-    private static final SessionFactory sessionFactory = HibernateTestUtil.buildSessionFactory();
+public class CarRepositoryTest extends TestBase {
 
-    private static final Session session = (Session) Proxy.newProxyInstance(SessionFactory.class.getClassLoader(), new Class[]{Session.class},
-            (proxy, method, args1) -> method.invoke(sessionFactory.getCurrentSession(), args1));
-
-    private static final CarRepository carRepository = new CarRepository(session);
-
-    @BeforeAll
-    static void initDB() {
-        TestDataImporter.importData(sessionFactory);
-    }
-
-    @AfterAll
-    static void afterAll() {
-        sessionFactory.close();
-    }
-
-    @BeforeEach
-    void setUp() {
-        session.beginTransaction();
-    }
-
-    @AfterEach
-    void tearDown() {
-        session.getTransaction().rollback();
-    }
+    private final CarRepository carRepository = new CarRepository(session);
 
     @Test
     void findAllCarsByClientId() {
         List<Car> carList = carRepository.findAllCarsByClientId(1L);
         assertThat(carList).hasSize(2);
 
-        var models = carList.stream().map(Car::getModel).collect(toSet());
-        assertThat(models).containsExactlyInAnyOrder("Audi", "Lada");
+        var carIds = carList.stream()
+                .map(Car::getId)
+                .collect(toSet());
+
+        assertThat(carIds).containsExactlyInAnyOrder(1L, 2L);
     }
 
     @Test

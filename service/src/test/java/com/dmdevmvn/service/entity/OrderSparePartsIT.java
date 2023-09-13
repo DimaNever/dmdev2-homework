@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 @Slf4j
 class OrderSparePartsIT {
+
     private static SessionFactory sessionFactory;
     private Session session;
 

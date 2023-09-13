@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 public class HqlIT {
 
+
     private static SessionFactory sessionFactory;
     private Session session;
 
