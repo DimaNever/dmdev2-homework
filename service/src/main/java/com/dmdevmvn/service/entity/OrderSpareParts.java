@@ -23,16 +23,18 @@ import javax.persistence.Table;
 @Builder
 @Entity
 @Table(name = "order_spare_parts")
-public class OrderSpareParts {
+public class OrderSpareParts implements BaseEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "order_id")
     private Order order;
 
     @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "spare_part_id")
     private SparePart sparePart;
 
     private Integer quantity;

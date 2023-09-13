@@ -15,7 +15,7 @@ import java.util.List;
 import static java.util.stream.Collectors.toSet;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CarDaoWitEntityGraphsIT {
+public class CarDaoWithHqlWitEntityGraphsIT {
 
     private static final SessionFactory sessionFactory = HibernateTestUtil.buildSessionFactory();
     private final CarDaoWithEntityGraphs carDaoWithEntityGraphs = CarDaoWithEntityGraphs.getInstance();

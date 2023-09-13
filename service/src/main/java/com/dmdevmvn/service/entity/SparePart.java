@@ -25,7 +25,7 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "spare_part")
-public class SparePart {
+public class SparePart implements BaseEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

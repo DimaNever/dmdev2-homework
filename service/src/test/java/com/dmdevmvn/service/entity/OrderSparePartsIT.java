@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 @Slf4j
 class OrderSparePartsIT {
+
     private static SessionFactory sessionFactory;
     private Session session;
 
@@ -50,10 +51,10 @@ class OrderSparePartsIT {
 
     @Test
     void saveOrderSpareParts() {
-        User user = buildRandomUser("User", "OrderSpareParts");
+        User user = buildRandomUser("User", "OrderSpareParts", Role.ADMIN);
         Client client = buildRandomClient("Client", "OrderSpareParts");
         Car car = buildCar("Mercedes", client);
-        Order order = buildOrder(user, car);
+        Order order = buildOrder(user, car, ServiceType.MAINTENANCE);
         SparePart sparePart = buildRandomSparePart();
         OrderSpareParts expectedOrderSpareParts = buildOrderSpareParts(order, sparePart);
 
@@ -72,10 +73,10 @@ class OrderSparePartsIT {
 
     @Test
     void getOrderSpareParts() {
-        User user = buildRandomUser("User", "OrderSpareParts");
+        User user = buildRandomUser("User", "OrderSpareParts", Role.ADMIN);
         Client client = buildRandomClient("Client", "OrderSpareParts");
         Car car = buildCar("Mercedes", client);
-        Order order = buildOrder(user, car);
+        Order order = buildOrder(user, car, ServiceType.MAINTENANCE);
         SparePart sparePart = buildRandomSparePart();
         OrderSpareParts expectedOrderSpareParts = buildOrderSpareParts(order, sparePart);
 
@@ -94,10 +95,10 @@ class OrderSparePartsIT {
 
     @Test
     void updateOrderSpareParts() {
-        User user = buildRandomUser("User", "OrderSpareParts");
+        User user = buildRandomUser("User", "OrderSpareParts", Role.ADMIN);
         Client client = buildRandomClient("Client", "OrderSpareParts");
         Car car = buildCar("Mercedes", client);
-        Order order = buildOrder(user, car);
+        Order order = buildOrder(user, car, ServiceType.MAINTENANCE);
         SparePart sparePart = buildRandomSparePart();
         OrderSpareParts expectedOrderSpareParts = buildOrderSpareParts(order, sparePart);
 
@@ -119,10 +120,10 @@ class OrderSparePartsIT {
 
     @Test
     void deleteOrderSpareParts() {
-        User user = buildRandomUser("User", "OrderSpareParts");
+        User user = buildRandomUser("User", "OrderSpareParts", Role.ADMIN);
         Client client = buildRandomClient("Client", "OrderSpareParts");
         Car car = buildCar("Mercedes", client);
-        Order order = buildOrder(user, car);
+        Order order = buildOrder(user, car, ServiceType.MAINTENANCE);
         SparePart sparePart = buildRandomSparePart();
         OrderSpareParts expectedOrderSpareParts = buildOrderSpareParts(order, sparePart);
 

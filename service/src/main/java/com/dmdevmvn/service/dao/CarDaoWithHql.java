@@ -8,9 +8,9 @@ import org.hibernate.Session;
 import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class CarDao {
+public class CarDaoWithHql {
 
-    private static final CarDao INSTANCE = new CarDao();
+    private static final CarDaoWithHql INSTANCE = new CarDaoWithHql();
 
     public List<Car> findAll(Session session) {
         return session.createQuery("select c from Car c", Car.class)
@@ -46,7 +46,7 @@ public class CarDao {
                 .list();
     }
 
-    public static CarDao getInstance() {
+    public static CarDaoWithHql getInstance() {
         return INSTANCE;
     }
 }
