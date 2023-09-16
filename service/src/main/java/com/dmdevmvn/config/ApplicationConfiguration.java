@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PreDestroy;
-
+import javax.persistence.EntityManager;
 import java.lang.reflect.Proxy;
 
 @Configuration
@@ -16,13 +16,13 @@ import java.lang.reflect.Proxy;
 public class ApplicationConfiguration {
 
     @Bean
-    public Session session(SessionFactory sessionFactory) {
+    public EntityManager entityManager(SessionFactory sessionFactory) {
         return (Session) Proxy.newProxyInstance(SessionFactory.class.getClassLoader(), new Class[]{Session.class},
                 (proxy, method, args1) -> method.invoke(sessionFactory.getCurrentSession(), args1));
     }
 
     @Bean
-    SessionFactory sessionFactory() {
+    public SessionFactory sessionFactory() {
         return HibernateUtil.buildSessionFactory();
     }
 

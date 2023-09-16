@@ -52,7 +52,7 @@ public class CarRepositoryTest extends TestBase {
         Car expectedCar = EntityUtil.buildCar("Ford", expectedClient);
         var saveCar = carRepository.save(expectedCar);
 
-        session.clear();
+        entityManager.clear();
 
         assertNotNull(saveCar.getId());
     }
@@ -60,11 +60,11 @@ public class CarRepositoryTest extends TestBase {
     @Test
     void readCar() {
         Client expectedClient = EntityUtil.buildRandomClient("Save", "Car");
-        session.save(expectedClient);
+        entityManager.persist(expectedClient);
         Car expectedCar = EntityUtil.buildCar("Ford", expectedClient);
         carRepository.save(expectedCar);
 
-        session.clear();
+        entityManager.clear();
 
         Optional<Car> actualCar = carRepository.findById(expectedCar.getId());
 
@@ -75,7 +75,7 @@ public class CarRepositoryTest extends TestBase {
     @Test
     void updateCar() {
         Client expectedClient = EntityUtil.buildRandomClient("Save", "Car");
-        session.save(expectedClient);
+        entityManager.persist(expectedClient);
         Car expectedCar = EntityUtil.buildCar("Ford", expectedClient);
 
         carRepository.save(expectedCar);
@@ -83,8 +83,8 @@ public class CarRepositoryTest extends TestBase {
         expectedCar.setModel("UPDATE");
         carRepository.update(expectedCar);
 
-        session.flush();
-        session.clear();
+        entityManager.flush();
+        entityManager.clear();
 
         var actualCar = carRepository.findById(expectedCar.getId());
 
@@ -95,15 +95,15 @@ public class CarRepositoryTest extends TestBase {
     @Test
     void deleteCar() {
         Client expectedClient = EntityUtil.buildRandomClient("Save", "Car");
-        session.save(expectedClient);
+        entityManager.persist(expectedClient);
         Car expectedCar = EntityUtil.buildCar("Ford", expectedClient);
 
         carRepository.save(expectedCar);
 
         carRepository.delete(expectedCar);
 
-        session.flush();
-        session.clear();
+        entityManager.flush();
+        entityManager.clear();
 
         assertTrue(carRepository.findById(expectedCar.getId()).isEmpty());
     }

@@ -20,7 +20,7 @@ class UserRepositoryTest extends TestBase {
         User expectedUser = EntityUtil.buildRandomUser("Save", "John", Role.ADMIN);
         userRepository.save(expectedUser);
 
-        session.clear();
+        entityManager.clear();
 
         var optionalUser = userRepository.findById(expectedUser.getId());
         assertNotNull(optionalUser);
@@ -33,8 +33,8 @@ class UserRepositoryTest extends TestBase {
 
         userRepository.delete(expectedUser);
 
-        session.flush();
-        session.clear();
+        entityManager.flush();
+        entityManager.clear();
 
         assertTrue(userRepository.findById(expectedUser.getId()).isEmpty());
     }
@@ -47,8 +47,8 @@ class UserRepositoryTest extends TestBase {
         expectedUser.setFirstName("Update");
         userRepository.update(expectedUser);
 
-        session.flush();
-        session.clear();
+        entityManager.flush();
+        entityManager.clear();
 
         var optionalUser = userRepository.findById(expectedUser.getId());
 

@@ -3,7 +3,6 @@ package com.dmdevmvn.dao;
 import com.dmdevmvn.entity.SparePart;
 import com.dmdevmvn.util.EntityUtil;
 import com.dmdevmvn.util.TestBase;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,10 +19,10 @@ class SparePartRepositoryTest extends TestBase {
         SparePart expectedSparePart = EntityUtil.buildRandomSparePart();
         sparePartRepository.save(expectedSparePart);
 
-        session.clear();
+        entityManager.clear();
 
         var optionalSparePart = sparePartRepository.findById(expectedSparePart.getId());
-        Assertions.assertNotNull(optionalSparePart);
+        assertNotNull(optionalSparePart);
     }
 
     @Test
@@ -33,8 +32,8 @@ class SparePartRepositoryTest extends TestBase {
 
         sparePartRepository.delete(expectedSparePart);
 
-        session.flush();
-        session.clear();
+        entityManager.flush();
+        entityManager.clear();
 
         assertTrue(sparePartRepository.findById(expectedSparePart.getId()).isEmpty());
     }
@@ -47,8 +46,8 @@ class SparePartRepositoryTest extends TestBase {
         expectedSparePart.setTitle("Update");
         sparePartRepository.update(expectedSparePart);
 
-        session.flush();
-        session.clear();
+        entityManager.flush();
+        entityManager.clear();
         var optionalSparePart = sparePartRepository.findById(expectedSparePart.getId());
 
         assertTrue(optionalSparePart.isPresent());

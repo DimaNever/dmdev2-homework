@@ -19,7 +19,7 @@ class ClientRepositoryTest extends TestBase {
         Client expectedClient = EntityUtil.buildRandomClient("Ivan", "Ivanov");
         clientRepository.save(expectedClient);
 
-        session.clear();
+        entityManager.clear();
 
         var actualClient = clientRepository.findById(expectedClient.getId());
         assertNotNull(actualClient);
@@ -32,8 +32,8 @@ class ClientRepositoryTest extends TestBase {
 
         clientRepository.delete(expectedClient);
 
-        session.flush();
-        session.clear();
+        entityManager.flush();
+        entityManager.clear();
 
         assertTrue(clientRepository.findById(expectedClient.getId()).isEmpty());
     }
@@ -46,8 +46,8 @@ class ClientRepositoryTest extends TestBase {
         expectedClient.setFirstName("Update");
         clientRepository.update(expectedClient);
 
-        session.flush();
-        session.clear();
+        entityManager.flush();
+        entityManager.clear();
 
         var optionalClient = clientRepository.findById(expectedClient.getId());
 

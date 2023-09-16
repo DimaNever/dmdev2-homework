@@ -30,11 +30,11 @@ class OrderRepositoryTest extends TestBase {
         Car expectedCar = buildCar("BMW", expectedClient);
         Order expectedOrder = buildOrder(expectedUser, expectedCar, ServiceType.MAINTENANCE);
 
-        session.save(expectedUser);
-        session.save(expectedClient);
-        session.save(expectedCar);
+        entityManager.persist(expectedUser);
+        entityManager.persist(expectedClient);
+        entityManager.persist(expectedCar);
         orderRepository.save(expectedOrder);
-        session.clear();
+        entityManager.clear();
 
         var optionalOrder = orderRepository.findById(expectedOrder.getId());
         assertNotNull(optionalOrder);
@@ -47,15 +47,15 @@ class OrderRepositoryTest extends TestBase {
         Car expectedCar = buildCar("BMW", expectedClient);
         Order expectedOrder = buildOrder(expectedUser, expectedCar, ServiceType.MAINTENANCE);
 
-        session.save(expectedUser);
-        session.save(expectedClient);
-        session.save(expectedCar);
+        entityManager.persist(expectedUser);
+        entityManager.persist(expectedClient);
+        entityManager.persist(expectedCar);
         orderRepository.save(expectedOrder);
 
         orderRepository.delete(expectedOrder);
 
-        session.flush();
-        session.clear();
+        entityManager.flush();
+        entityManager.clear();
 
         assertTrue(orderRepository.findById(expectedOrder.getId()).isEmpty());
     }
@@ -67,16 +67,16 @@ class OrderRepositoryTest extends TestBase {
         Car expectedCar = buildCar("BMW", expectedClient);
         Order expectedOrder = buildOrder(expectedUser, expectedCar, ServiceType.MAINTENANCE);
 
-        session.save(expectedUser);
-        session.save(expectedClient);
-        session.save(expectedCar);
+        entityManager.persist(expectedUser);
+        entityManager.persist(expectedClient);
+        entityManager.persist(expectedCar);
         orderRepository.save(expectedOrder);
 
         expectedOrder.setServiceType(ServiceType.REPAIR);
         orderRepository.update(expectedOrder);
 
-        session.flush();
-        session.clear();
+        entityManager.flush();
+        entityManager.clear();
 
         var optionalOrder = orderRepository.findById(expectedOrder.getId());
 
