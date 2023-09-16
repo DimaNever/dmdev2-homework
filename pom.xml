@@ -116,6 +116,17 @@
                 <version>5.6.15.Final</version>
                 <scope>provided</scope>
             </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>5.3.29</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>5.3.29</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

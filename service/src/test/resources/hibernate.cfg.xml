@@ -12,11 +12,11 @@
         <property name="hibernate.hbm2ddl.auto">create</property>
         <property name="hibernate.current_session_context_class">thread</property>
 
-        <mapping class="com.dmdevmvn.service.entity.User"/>
-        <mapping class="com.dmdevmvn.service.entity.Client"/>
-        <mapping class="com.dmdevmvn.service.entity.SparePart"/>
-        <mapping class="com.dmdevmvn.service.entity.Car"/>
-        <mapping class="com.dmdevmvn.service.entity.Order"/>
-        <mapping class="com.dmdevmvn.service.entity.OrderSpareParts"/>
+        <mapping class="com.dmdevmvn.entity.User"/>
+        <mapping class="com.dmdevmvn.entity.Client"/>
+        <mapping class="com.dmdevmvn.entity.SparePart"/>
+        <mapping class="com.dmdevmvn.entity.Car"/>
+        <mapping class="com.dmdevmvn.entity.Order"/>
+        <mapping class="com.dmdevmvn.entity.OrderSpareParts"/>
     </session-factory>
 </hibernate-configuration>

@@ -1,6 +1,5 @@
 package com.dmdevmvn.util;
 
-import com.dmdevmvn.service.util.HibernateUtil;
 import lombok.experimental.UtilityClass;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
