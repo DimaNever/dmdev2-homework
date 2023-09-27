@@ -3,6 +3,7 @@ package com.dmdevmvn.dao;
 import com.dmdevmvn.entity.BaseEntity;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.io.Serializable;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public abstract class RepositoryBase<K extends Serializable, E extends BaseEntity<K>> implements Dao<K, E> {
 

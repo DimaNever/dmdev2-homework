@@ -12,22 +12,22 @@ import javax.persistence.EntityManager;
 import java.lang.reflect.Proxy;
 
 @Configuration
-@ComponentScan(basePackages = "com.dmdevmvn")
+//@ComponentScan(basePackages = "com.dmdevmvn")
 public class ApplicationConfiguration {
 
-    @Bean
-    public EntityManager entityManager(SessionFactory sessionFactory) {
-        return (Session) Proxy.newProxyInstance(SessionFactory.class.getClassLoader(), new Class[]{Session.class},
-                (proxy, method, args1) -> method.invoke(sessionFactory.getCurrentSession(), args1));
-    }
-
-    @Bean
-    public SessionFactory sessionFactory() {
-        return HibernateUtil.buildSessionFactory();
-    }
-
-    @PreDestroy
-    public void closeResources() {
-        sessionFactory().close();
-    }
+//    @Bean
+//    public EntityManager entityManager(SessionFactory sessionFactory) {
+//        return (Session) Proxy.newProxyInstance(SessionFactory.class.getClassLoader(), new Class[]{Session.class},
+//                (proxy, method, args1) -> method.invoke(sessionFactory.getCurrentSession(), args1));
+//    }
+//
+//    @Bean
+//    public SessionFactory sessionFactory() {
+//        return HibernateUtil.buildSessionFactory();
+//    }
+//
+//    @PreDestroy
+//    public void closeResources() {
+//        sessionFactory().close();
+//    }
 }

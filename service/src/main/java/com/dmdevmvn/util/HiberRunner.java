@@ -14,14 +14,14 @@ public class HiberRunner {
 //            TestDataImporter.importData(sessionFactory);
 //        }
 
-        try (var sessionFactory = HibernateUtil.buildSessionFactory()) {
-            var session = (Session) Proxy.newProxyInstance(SessionFactory.class.getClassLoader(), new Class[]{Session.class},
-                    (proxy, method, args1) -> method.invoke(sessionFactory.getCurrentSession(), args1));
-
-            session.beginTransaction();
-
-            var sparePartRepository = new SparePartRepository(session);
-            var allSparePartsByOrderId = sparePartRepository.findAllSparePartsByOrderId(2L);
+//        try (var sessionFactory = HibernateUtil.buildSessionFactory()) {
+//            var session = (Session) Proxy.newProxyInstance(SessionFactory.class.getClassLoader(), new Class[]{Session.class},
+//                    (proxy, method, args1) -> method.invoke(sessionFactory.getCurrentSession(), args1));
+//
+//            session.beginTransaction();
+//
+//            var sparePartRepository = new SparePartRepository(session);
+//            var allSparePartsByOrderId = sparePartRepository.findAllSparePartsByOrderId(2L);
 
 //            var carRepository = new CarRepository(session);
 //            carRepository.findByID(1L).ifPresent(System.out::println);
@@ -59,7 +59,7 @@ public class HiberRunner {
 //            );
 //            carService.create(carCreateDto);
 
-            session.getTransaction().commit();
+//            session.getTransaction().commit();
         }
     }
-}
+//}
